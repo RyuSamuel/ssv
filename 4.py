@@ -501,3 +501,4 @@ print(factorialRecur(4))
 def MultofthreeFive(x:int)->int:
     temp = []
 
+[출력표현식 for 요소 in 입력Sequence [if 조건식]]
