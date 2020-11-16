@@ -198,15 +198,16 @@ def groupAnagram(s:List[str]):
 
 print(groupAnagram(s))
 """
-string = "ab"
+"""
+string = "123454321"
 
 def longestPalindrome(s:str):
-    def expand(left: int, right: int):
-        while left >= 0 and right <= len(s) and s[left] == s[right - 1]:
+    def expand(left:int, right: int):
+        while left >= 0 and right <= len(s) and s[left] == s[right-1]:
             left -= 1
-            right += 1
+            right += right
 
-        return s[left + 1:right - 1]
+        return s[left - 1: right - 1]
 
     if len(s) <= 2 or s == s[::-1]:
         return s
@@ -214,12 +215,452 @@ def longestPalindrome(s:str):
     result = ''
 
     for i in range(len(s) - 1):
-        result = max(result,
-                     expand(1, i + 1),
-                     expand(1, i - 1),
-                     key = len)
+        result = max(result, expand(i, i + 1), expand(i, i + 2))
 
     return result
 
+
 print(longestPalindrome(string))
 
+"""
+"""
+import time
+import datetime
+start = time.time()
+
+n = [2,7,11,15]
+
+def targetNum(n:List[int], target: int):
+    for i in range(len(n)):
+        for j in range(i + 1, len(n)):
+            if n[i] + n[j] == target:
+                return [i,j]
+
+sec = time.time() - start
+times = str(datetime.timedelta(seconds=sec)).split(".")
+times = times[0]
+print(times)
+
+print(targetNum(n, 18))
+"""
+
+nums = [2,7,11,15]
+"""
+def targetNumMK2(nums:List[int], target: int):
+
+    for i, n in enumerate(nums):
+        complement = target - n
+
+        if complement in nums[i+1:]:
+            return nums.index(n), nums[i + 1:].index(complement) + (i + 1)
+
+print(targetNumMK2(nums, 26))
+"""
+"""
+def twoSum(nums: List[int], target: int):
+
+    nums_map = {}
+
+    for i, n in enumerate(nums):
+        nums_map[n] = i
+
+    for i, n in enumerate(nums):
+        if target - n in nums_map and i != nums_map[target - n]:
+            return nums.index(n), nums_map[target - n]
+
+print(twoSum(nums, 18))
+"""
+"""
+n = [0,1442,1245,245,1321,0,125,53,21245,1123,2,1]
+
+def trapping(height:List[int]):
+    #높이가 없으면 0으로 출력
+    if not height:
+        return 0
+    
+    volume = 0
+    left, right = 0, len(height) - 1
+    
+    #현재 왼쪽과 오른쪽의 포인터 지점에서 가장 높은 높이를 선언
+    left_max, right_max = height[left], height[right]
+
+    #포인터들이 서로 만날때까지 최장높이를 갱신
+    while left < right:
+        left_max, right_max = max(height[left], left_max), max(height[right], right_max)
+
+        #포인터 이동
+        if left_max <= right_max:
+            volume += left_max - height[left]
+            left += 1
+
+        else:
+            volume += right_max - height[right]
+            right -= 1
+
+    return volume
+
+print(trapping(n))
+"""
+"""
+a = [-1, 0, 1, 2, -1, -4]
+def SumThree(arr = List[int]) -> List[List[int]]:
+
+    results = []
+    arr.sort()
+
+    for i in range(len(arr) - 2):
+        if i > 0 and arr[i] == arr[i - 1]:
+            continue
+
+        for j in range(i + 1, len(arr) - 1):
+            if j > i + 1 and arr[j] == arr[j - 1]:
+                continue
+
+                for k in range(j + 1, len(arr)):
+                    if k > j + 1 and arr[k] == arr[k - 1]:
+                        continue
+
+                    if arr[i] + arr[j] + arr[k] == 0:
+                        results.append((arr[i], arr[j], arr[k]))
+
+    return results
+
+print(SumThree(a))
+"""
+"""
+def sumOfThree(arr:List[int]):
+    result = []
+    arr.sort()
+
+    for i in range(len(arr)-2):
+        if i > 0 and arr[i] == arr[i - 1]:
+            continue #배열의 i번째 요소와 이전 요소가 중복될 경우 건너뛰기
+
+        left, right = i + 1, len(arr) - 1
+
+        while left < right:
+            sum = arr[i] + arr[left] + arr[right]
+
+            if sum < 0:
+                left += 1
+
+            elif sum > 0:
+                right -= 1
+
+            else:
+                result.append((arr[i], arr[left], arr[right]))
+
+                while left < right and arr[left] == arr[left + 1]:
+                    left += 1
+                while left < right and arr[right] == arr[right - 1]:
+                    right -= 1
+
+                right -= 1
+                left += 1
+
+    return result
+
+print(sumOfThree(a))
+"""
+
+"""
+def test1(arr:List[int]):
+    result = []
+    arr.sort()
+
+    for i in range(len(arr) - 2):
+        if i > 0 and arr[i] == arr[i-1]:
+            continue
+
+        left = i + 1
+        right = len(arr) - 1
+
+        while left < right:
+
+            sum = arr[i] + arr[left] + arr[right]
+
+            if sum < 0:
+                left += 1
+
+            elif sum > 0:
+                right -= 1
+
+            else:
+                result.append((arr[i], arr[left], arr[right]))
+
+                while left < right and arr[left] == arr[left + 1]:
+                    left += 1
+
+                while left < right and arr[right] == arr[right - 1]:
+                    right -= 1
+
+                left += 1
+                right -= 1
+
+    return result
+
+print(test1(a))
+"""
+"""
+array = [1,4,3,2,5,6]
+def arryPart(arr:List[int]):
+    sum = 0
+    arr.sort()
+    pair = []
+
+    for i in arr:
+        pair.append(i)
+
+        if len(pair) == 2:
+            sum += min(pair)
+            pair = []
+
+    return sum
+
+
+print(arryPart(array))
+
+def arryPart2(arr:List[int]):
+    sum = 0
+    arr.sort()
+
+    for i, n in enumerate(arr):
+        if i % 2 == 0:
+            sum += n
+
+    return sum
+
+print(arryPart2(array))
+
+def arryPart3(arr):
+    return sum(sorted(arr)[::2])
+
+print(arryPart3(array))
+"""
+"""
+arr = [1,2,3,4]
+
+def arrayTimes(arr:List[int]):
+    times = 1
+    output = []
+
+    for i in range(0, len(arr)):
+        output.append(times)
+        times = times * arr[i]
+
+    times = 1
+
+    for i in range(len(arr) - 1, 0 - 1, -1):
+        output[i] = output[i] * times
+        times = times * arr[i]
+
+    return output
+
+print(arrayTimes(arr))
+"""
+"""
+stocks = [7,1,5,3,6,4]
+
+def stock(arr:List[int]):
+    maxP = 0
+
+    for i, price in enumerate(arr):
+        for j in range(i, len(arr)):
+            maxP = max(arr[j] - price, maxP)
+
+    return maxP
+
+print(stock(stocks))
+
+import sys
+
+def stock2(arr:List[int]):
+
+    profit = 0
+    min_price = sys.maxsize #정수의 최댓값을 의미
+
+    for i in arr:
+        min_price = min(min_price, i)
+        profit = max(profit, i - min_price) #Kadene's algorithm
+
+    return profit
+
+print(stock2(stocks))
+"""
+"""
+arr = ["eat", "tea", "tan", "ate", "nat", "bat"]
+
+def groupAna(arr:List[str]):
+
+    anagrams = collections.defaultdict(list)
+
+    for i in arr:
+        anagrams[''.join(sorted(i))].append(i)
+
+    return anagrams.values()
+
+print(*groupAna(arr))
+"""
+"""
+arr = [1,2,0,-1,-4,-1]
+
+def addThree(arr:List[int]):
+    result = []
+    arr.sort()
+
+    for i in range(len(arr) - 2):
+        if i > 0 and arr[i] == arr[i - 1]:
+            continue
+
+        left = i + 1
+        right = len(arr) - 1
+
+        while left < right:
+            sum = arr[i] + arr[left] + arr[right]
+            if sum < 0:
+                left += 1
+
+            elif sum > 0:
+                right -= 1
+
+            else:
+                result.append((arr[i], arr[left], arr[right]))
+
+                while left < right and arr[left] == arr[left + 1]:
+                    left += 1
+
+                while left < right and arr[right] == arr[right - 1]:
+                    right -= 1
+
+                left += 1
+                right -= 1
+
+    return result
+
+print(addThree(arr))
+"""
+
+
+arr = [1,2,3,2,1]
+
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+"""
+def isPalindrome(head:ListNode):
+    q: List = []
+
+    if not head:
+        return True
+
+    node = head
+
+    while node is not None:
+        q.append(node.val)
+        node = node.next
+
+    while len(q) > 1:
+        if q.pop(0) != q.pop():
+            return False
+
+    return True
+
+print(isPalindrome(arr))
+"""
+import collections
+"""
+def isPalindromeDeque(head:ListNode):
+    q: Deque = collections.deque()
+
+    if not head:
+        return True
+
+    node = head
+
+
+    while node is not None:
+        q.append(node.val)
+        node = node.next
+
+    while len(q) > 1:
+        if q.popleft() != q.pop():
+            return False
+
+    return True
+
+print(isPalindromeDeque(arr))
+
+"""
+"""
+def isPalindromeTwo(head:ListNode):
+
+    rev = None
+    slow = fast = head
+
+    while fast and fast.next: #while fast and fast.next is not empty, do the followings (or fast and fast.next is true)
+        fast = fast.next.next #fast runs in 2 steps
+        rev, rev.next, slow = slow, rev, slow.next #store opposite linked list into rev
+
+    if fast: #if number of inputs is odd, slow will move one step in order to exclude the median
+        slow = slow.next
+
+    while rev and rev.val == slow.val:
+        slow, rev = slow.next, rev.next
+
+    return not rev
+
+l = ListNode(1)
+l.next = ListNode(2)
+l.next.next = ListNode(3)
+l.next.next.next = ListNode(2)
+l.next.next.next.next = ListNode(1)
+
+print(isPalindromeTwo(l))
+"""
+"""
+class Solution:
+    def mergeTwoLists(self, l1:ListNode, l2:ListNode):
+        if (not l1) or (l2 and l1.val > l2.val):
+            l1, l2 = l2, l1
+
+        if l1:
+            l1.next = self.mergeTwoLists(l1.next, l2)
+
+        return l1
+
+l1 = ListNode(1)
+l1.next = ListNode(2)
+l1.next.next = ListNode(4)
+
+l2 = ListNode(1)
+l2.next = ListNode(3)
+l2.next.next = ListNode(4)
+
+print(Solution.mergeTwoLists(l1,l2))
+"""
+
+lists = ListNode(1)
+lists.next = ListNode(2)
+lists.next.next = ListNode(3)
+lists.next.next.next = ListNode(4)
+
+class Solution:
+
+    def swapPairs(self, head: ListNode) -> ListNode:
+        if head is None:
+            return head
+
+        if head.next is None:
+            return head
+
+        nextNode = head.next
+        temp = nextNode.next
+        nextNode.next = head #nextNode가 head를 가르키게 되니까 1->2에서 2->1이 됨
+
+        head.next = self.swapPairs(temp)
+
+        return nextNode
+
+print(swapPairs(lists))
