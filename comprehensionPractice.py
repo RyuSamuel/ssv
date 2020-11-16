@@ -645,7 +645,7 @@ lists = ListNode(1)
 lists.next = ListNode(2)
 lists.next.next = ListNode(3)
 lists.next.next.next = ListNode(4)
-
+"""
 class Solution:
 
     def swapPairs(self, head: ListNode) -> ListNode:
@@ -664,3 +664,17 @@ class Solution:
         return nextNode
 
 print(swapPairs(lists))
+"""
+
+def reverseList(self, head: ListNode) -> ListNode:
+    def reverse(node, prev: ListNode = None):
+        if node is None:
+            return prev
+
+        next, node.next = node.next, prev
+
+        return reverse(next, node)
+
+    return reverse(head)
+
+print(reverseList(lists))
