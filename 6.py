@@ -38,7 +38,7 @@ class LinkedList:
     def printNode(self):
         curr = self.head
         while curr:
-            print(curr.data)
+            print(curr.getData())
             curr = curr.getNextNode()
 
 
@@ -53,6 +53,7 @@ myList2.addNode(3)
 myList2.addNode(6)
 myList2.addNode(2)
 
+#myList.printNode()
 
 class Solution:
     def reverseLists(self, head:Node):
@@ -65,7 +66,6 @@ class Solution:
         return prev
 
     def convertNodeListToList(self, node:Node)->List:
-
         arr: List = []
 
         while node:
@@ -95,4 +95,4 @@ class Solution:
 
         return self.convertListToNodeList(str(result))
 
-print(Solution.addLists(myList,myList2))
+print(Solution.addLists(myList, myList2, myList))
