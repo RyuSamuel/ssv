@@ -23,3 +23,6 @@ myList.addNode(8)
 myList.addNode(9)
 
 myList.printNode()
+
+
+
