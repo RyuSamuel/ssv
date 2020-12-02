@@ -20,6 +20,8 @@ class Node:
    def setNextNode(self,val):
        self.nextNode = val
 
+
+
 class LinkedList:
 
     def __init__(self, head=None):
@@ -46,6 +48,8 @@ myList.addNode(5)
 myList.addNode(7)
 myList.addNode(8)
 myList.addNode(9)
+
+LinkedList.printNode(myList)
 
 def pairNodeSwap(node: Node):
 
