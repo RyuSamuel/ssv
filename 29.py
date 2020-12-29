@@ -45,3 +45,5 @@ def numJewlsInStonesThree(J: str, S: str):
     return counter
 
 print(numJewlsInStonesThree("aA", "aAAbbbb"))
+
+def numJewelsInStonesFour(J, S):
