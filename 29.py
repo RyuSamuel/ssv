@@ -46,4 +46,68 @@ def numJewlsInStonesThree(J: str, S: str):
 
 print(numJewlsInStonesThree("aA", "aAAbbbb"))
 
-def numJewelsInStonesFour(J, S):
+#def numJewelsInStonesFour(J, S):
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def stonesAndJewels(S: str, J: str):
+    freq = {}
+    count = 0
+
+    for char in S:
+        if char not in freq:
+            freq[char] = 1
+        else:
+            freq[char] += 1
+
+    for char in J:
+        if char in freq:
+            count += freq[char]
+
+    return count
+
+print(stonesAndJewels("aAbB","aAAbbbb"))
+
+
+def stonesAndJewels2(S, J):
+
+    freq = collections.defaultdict(int)
+    count = 0
+
+    for char in S:
+        freq[char] += 1
+
+    for char in J:
+        count += freq[char]
+
+    return count
+
+print(stonesAndJewels2("aA", "aAAbbbb"))
+
+def stonesAndJewels3(S, J):
+
+    freq = collections.Counter(S)
+    count = 0
+
+    for char in J:
+        count += freq[char]
+
+    return count
+
+print(stonesAndJewels3("aA", "aAAbbbb"))
