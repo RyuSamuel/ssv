@@ -39,24 +39,19 @@ print(maxHeapify(A, 3))
 
 def minHeapify(A: List[int], i: int):
 
-    i = i - 1
+    smallest = i
     left = (i * 2) + 1
+    right = (i * 2) + 2
 
-    if len(A) > left:
-        right = (i * 2) + 2
+    if left <= len(A) and A[left] < A[smallest]:
+        smallest = left
 
-        if A[left] <= len(A) and A[left] < A[i]:
-            smallest = left
+    if right <= len(A) and A[right] < A[smallest]:
+        smallest = right
 
-        else:
-            smallest = i
-
-        if A[right] <= len(A) and A[right] < A[smallest]:
-            smallest = right
-
-        if not smallest == i:
-            A[i], A[smallest] = A[smallest], A[i]
-            minHeapify(A, (smallest + 1))
+    if smallest != i:
+        A[i], A[smallest] = A[smallest], A[i]
+        minHeapify(A, smallest)
 
     return A
 
