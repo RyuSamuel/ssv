@@ -37,24 +37,64 @@ def maxHeapify(A: List[int], i: int):
 print(maxHeapify(A, 1))
 print(maxHeapify(A, 3))
 
-def minHeapify(A: List[int], i: int):
 
-    smallest = i
-    left = (i * 2) + 1
-    right = (i * 2) + 2
+def MinHeapify(A, i):
+    i = i - 1
 
-    if left <= len(A) and A[left] < A[smallest]:
-        smallest = left
+    if i == 0:
+        left = 1
+        right = 2
+    else:
+        left = (i * 2) + 1
 
-    if right <= len(A) and A[right] < A[smallest]:
-        smallest = right
+    if len(A) > (i * 2) + 1:  # If a node has left children
+        if A[left] <= len(A) and A[left] < A[i]:
+            smallest = left
+        else:
+            smallest = i
 
-    if smallest != i:
-        A[i], A[smallest] = A[smallest], A[i]
-        minHeapify(A, smallest)
+        if len(A) > (i * 2) + 2:  # If a node has a right child
+            right = (i * 2) + 2
+
+            if A[right] <= len(A) and A[right] < A[smallest]:
+                smallest = right
+
+        if not smallest == i:
+            A[i], A[smallest] = A[smallest], A[i]
+            MinHeapify(A, (smallest + 1))  # Because i = i-1
 
     return A
 
 
+def minHeapify(A: List[int], i: int):
+
+    i = i - 1
+
+    if i == 0:
+        left = 1
+        right = 2
+    else:
+        left = (i * 2) + 1
+
+    if len(A) > (i * 2) + 1:
+        if A[left] <= len(A) and A[left] < A[i]:
+            smallest = left
+        else:
+            smallest = i
+
+        if len(A) > (i * 2) + 2:
+            right = (i * 2) + 2
+
+            if A[right] <= len(A) and A[right] < A[smallest]:
+                smallest = right
+
+        if smallest != i:
+            A[i], A[smallest] = A[smallest], A[i]
+            minHeapify(A, (smallest + 1))
+
+    return A
+
+print(MinHeapify(A, 1))
+print(MinHeapify(A, 3))
 print(minHeapify(A, 1))
 print(minHeapify(A, 3))
