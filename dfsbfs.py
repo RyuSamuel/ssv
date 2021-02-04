@@ -17,7 +17,7 @@ from typing import List
 
 def numIslands(grid: List[List[str]]):
     def DFS(i, j):
-        if i <0 or i >= len(grid) or \
+        if i < 0 or i >= len(grid) or \
             j < 0 or j >= len(grid) or \
             grid[i][j] != '1':
             return
