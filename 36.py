@@ -1,4 +1,4 @@
-from type import List
+from typing import List
 
 def candidates(cands: List[int], tar = int):
 
